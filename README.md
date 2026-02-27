@@ -1,5 +1,7 @@
 # Smart Reviewer
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/75dfe56e-5e4f-4896-8faf-89bc482cda02/deploy-status)](https://app.netlify.com/projects/effulgent-faloodeh-3ac727/deploys)
+
 Single-page React + TypeScript app with a Node.js/Express backend that:
 - searches recent news articles,
 - analyzes selected articles using a GenAI API (summary + sentiment),
@@ -69,6 +71,11 @@ npm run dev
 ```bash
 npm run build
 ```
+
+## Deployment Status
+
+- Frontend deploy status is shown via the Netlify badge above.
+- Render does not provide an equivalent built-in public deploy badge like Netlify.
 
 ## Production Notes
 
