@@ -28,7 +28,7 @@ Single-page React + TypeScript app with a Node.js/Express backend that:
 
 ## Environment Variables
 
-Use `.env` in the project root and set values:
+Copy `.env.example` to `.env` in the project root and set values:
 
 - `NEWS_API_KEY`: API key for GNews
 - `GENAI_API_KEY`: API key for your GenAI provider
@@ -51,6 +51,7 @@ npm --prefix frontend install
 2. Configure env:
 
 ```bash
+cp .env.example .env
 # edit .env with real credentials
 ```
 
