@@ -59,15 +59,27 @@ export const analyzeAndStoreArticle = async (
     }
 
     const analysis = await analyzeArticle({ title, url, description });
+    const upsertResult = await ArticleAnalysis.updateOne(
+      { url },
+      {
+        $setOnInsert: {
+          title,
+          url,
+          summary: analysis.summary,
+          sentiment: analysis.sentiment
+        }
+      },
+      { upsert: true }
+    );
 
-    const stored = await ArticleAnalysis.create({
-      title,
-      url,
-      summary: analysis.summary,
-      sentiment: analysis.sentiment
-    });
+    const stored = await ArticleAnalysis.findOne({ url }).lean();
 
-    res.status(201).json({ article: stored, cached: false });
+    if (!stored) {
+      throw new Error('Failed to persist analyzed article');
+    }
+
+    const created = upsertResult.upsertedCount === 1;
+    res.status(created ? 201 : 200).json({ article: stored, cached: !created });
   } catch (error) {
     next(error);
   }
